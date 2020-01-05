@@ -30,6 +30,7 @@ def _match_nans(a, b, weights):
         pairwise locations.
     """
     if np.isnan(a).any() or np.isnan(b).any():
+        a, b = xr.broadcast(a, b)
         # Find pairwise indices in a and b that have nans.
         idx = np.logical_or(np.isnan(a), np.isnan(b))
         a[idx], b[idx] = np.nan, np.nan
